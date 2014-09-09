@@ -59,11 +59,13 @@ function liveUpdate() {
 				goodRows.push([ thisRow[1], roundedTemp ]);
 			}
 
-			setData(sortData(goodRows), goodRows[0][0]);
+			if (goodRows.length > 0) {
+				setData(sortData(goodRows)); // not supplying time arg
+			}
 		}
 	});
-
 	fetch.always( function() { setTimeout(liveUpdate, 5000); });
+
 }
 
 function buildSlider() {
