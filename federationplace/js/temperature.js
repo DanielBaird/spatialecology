@@ -75,22 +75,22 @@ function buildSlider() {
 		min: 1,
 		step:1,
 		value:slideVal,
-		slide: function( event, ui ) {
+		slide: function(event, ui) {
 			if (ui.value <= sliderSize) {
-				if (currentData) {
-					senseVal = sliderSize - ui.value;
-					updateSliderThumb(senseVal);
-				}
+				updateSliderThumb(sliderSize - ui.value);
 			} else {
 				return false;
 			}
+		},
+		stop: function(event, ui) {
+			updateSliderThumb();
 		}
 	});
 }
 
 function updateSliderThumb(index) {
 	index = index || sliderSize - $("#slider").slider("value");
-	if (currentData[index]) {
+	if (currentData && currentData[index]) {
 		setTemperature(currentData[index][1]);
 		setSliderColor(index);
 	}
