@@ -40,10 +40,18 @@ function parseCsv(str) {
 function liveUpdate() {
 	uid++;
 
-	var fetch = $.ajax('latest.csv?' + uid, {
-		cache: false,
-		timeout: 15000
+	// var fetch = $.ajax('latest.csv?' + uid, {
+	// 	cache: false,
+	// 	timeout: 15000
+	// });
+
+	var fetch = $.ajax( "https://finlay.jcu.io/feed/federation.csv", {
+		dataType: 'jsonp', // use JSONP
+		jsonp: 'jsonp',    // specify the callback using '?jsonp=[callback]'
+		cache: false,      // don't cache (jQuery's default for JSONP anyway)
+		timeout: 15000     // give it 15 seconds before giving up
 	});
+
 	fetch.done(function(data) {
 		var parsed = parseCsv(data);
 		if (parsed) {
@@ -64,7 +72,7 @@ function liveUpdate() {
 			}
 		}
 	});
-	fetch.always( function() { setTimeout(liveUpdate, 5000); });
+	fetch.always( function() { setTimeout(liveUpdate, 10000); });
 
 }
 
