@@ -224,6 +224,8 @@ li {
     -webkit-box-shadow: 0 5px 10px -5px #000;
     -moz-box-shadow: 0 5px 10px -5px #000;
     box-shadow: 0 5px 10px -5px #000;
+
+    transition: 0.2s;
 }
 
 .site * {
